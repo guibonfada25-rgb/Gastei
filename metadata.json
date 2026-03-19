@@ -1,0 +1,5 @@
+{
+  "name": "Gastei",
+  "description": "Elite personal finance assistant that transforms statements and voice into actionable financial intelligence.",
+  "requestFramePermissions": ["microphone"]
+}

@@ -1,0 +1,77 @@
+{
+  "entities": {
+    "Expense": {
+      "title": "Expense",
+      "description": "A financial transaction recorded by the user.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "description": { "type": "string" },
+        "amount": { "type": "number" },
+        "category": { "type": "string" },
+        "type": { "type": "string", "enum": ["Necessidade Fixa", "Desejo Pessoal", "Dívida/Investimento"] },
+        "source": { "type": "string", "enum": ["manual", "voice", "statement"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "date", "description", "amount", "category", "type"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "A user-defined category for expenses.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name"]
+    },
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "User preferences and financial goals.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "displayName": { "type": "string" },
+        "monthlyBudget": { "type": "number" },
+        "currency": { "type": "string", "default": "BRL" }
+      },
+      "required": ["userId"]
+    },
+    "Income": {
+      "title": "Income",
+      "description": "A financial inflow recorded by the user.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "description": { "type": "string" },
+        "amount": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "date", "description", "amount"]
+    }
+  },
+  "firestore": {
+    "/expenses/{expenseId}": {
+      "schema": "Expense",
+      "description": "Collection of all expenses."
+    },
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "User-defined categories."
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile data."
+    },
+    "/incomes/{incomeId}": {
+      "schema": "Income",
+      "description": "Collection of all incomes."
+    }
+  }
+}
